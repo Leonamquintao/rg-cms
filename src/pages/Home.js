@@ -17,7 +17,7 @@ class Home extends Component {
 
 		return (
 			<View style={container}>
-				<HeaderComponent headerText={'teste'} />
+				<HeaderComponent headerText={'Home'} />
 				<ScrollView>
 
 					<View style={content}>
