@@ -11,10 +11,10 @@ import Settings from './pages/Settings';
 
 const TabNavigator = createBottomTabNavigator(
   {
-    DashBoard: DashBoard,
-    Licence: Licence,
-    Notifications: Notifications,
-    Settings: Settings,
+    DashBoard,
+    Licence,
+    Notifications,
+    Settings,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -31,7 +31,7 @@ const TabNavigator = createBottomTabNavigator(
           case 'Settings':
             iconName = 'cogs';
             break;
-            case 'Notifications':
+          case 'Notifications':
             iconName = 'bell-o', badge = 3;
             break;
           default:

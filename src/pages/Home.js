@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import HeaderComponent from '../components/HeaderComponent'
+import HeaderComponent from '../components/HeaderComponent';
 
-export default class Home extends Component {
+import { connect } from 'react-redux';
+import * as actions from '.././store/actions';
+
+class Home extends Component {
+
+	constructor(props) {
+    super(props);
+	}
+
+	componentWillMount() {
+    if(this.props.mainState.logged == false) {
+      this.props.navigation.navigate('Login');
+    }
+	}
+	
 	render() {
 
 		const { container, txt, content } = styles;
@@ -21,6 +35,12 @@ export default class Home extends Component {
 		);
 	}
 };
+
+const mapStateToProps = state => {
+	return { mainState: state.mainState }
+}
+
+export default connect(mapStateToProps, actions) (Home);
 
 const styles = StyleSheet.create({
 	container: {

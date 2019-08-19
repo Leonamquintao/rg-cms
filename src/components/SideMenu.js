@@ -12,7 +12,7 @@ const routes =[
   { name: 'Home', path: 'Home', icon: 'home' },
   { name: 'Blank', path: 'Blank', icon: 'file-code-o' },
   { name: 'Terms', path: 'TermsOfUse', icon: 'list' },
-  { name: 'Tabs', path: 'TabNavigator', icon: 'th' },
+  { name: 'Dashboard', path: 'DashBoard', icon: 'th' },
   { name: 'Sair',  path: 'Exit', icon: 'sign-out' },
 ];
 
@@ -49,8 +49,8 @@ class SideMenu extends Component {
     const navigateAction = NavigationActions.navigate({
       routeName: route
     });
+    this.props.navigation.closeDrawer()
     this.props.navigation.dispatch(navigateAction);
-    if(route == 'Home') { this.props.navigation.closeDrawer() }
   }
 
   renderRoutes(routes) {
@@ -73,7 +73,7 @@ class SideMenu extends Component {
   }
 
   renderBadge(name) {
-    if(name == 'Blank') {
+    if(name == 'Dashboard') {
       return (
         <View style={styles.badgeConteiner}>
           <Text style={styles.badge}> 3 </Text>

@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import { Alert, BackHandler } from 'react-native';
 
-import AppDrawerNavigator from './src/Navigator'
+import AppNavigator from './src/AppNavigator'
 
-export default class App extends Component {
+import { connect } from 'react-redux';
+import * as actions from './src/store/actions';
+
+class App extends Component {
 
   constructor(props) { 
     super(props);
   }
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress.bind(this));
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress.bind(this));
   }
 
   render() {
     return (
-      <AppDrawerNavigator />
+      <AppNavigator />
     );
   }
 
@@ -27,7 +30,7 @@ export default class App extends Component {
   handleBackPress() {
     Alert.alert(
       'Atenção! 😓',
-      `Deseja mesmo sair do EstaciON ?`,
+      `Deseja mesmo sair do App ?`,
       [
         { text: 'Cancelar', style: 'cancel', onPress: () => { } },
         { text: 'Sim', onPress: () =>  { BackHandler.exitApp(); } },
@@ -37,3 +40,9 @@ export default class App extends Component {
     return true;
   }
 };
+
+const mapStateToProps = state => {
+	return { mainState: state.mainState }
+}
+
+export default connect(mapStateToProps, actions) (App);

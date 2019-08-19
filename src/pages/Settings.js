@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-
+import HeaderComponent from '../components/HeaderComponent'
 
 export default class Settings extends Component {
 	render() {
@@ -9,6 +9,7 @@ export default class Settings extends Component {
 
 		return (
 			<View style={container}>
+				<HeaderComponent headerText={'Settings'} />
 				<ScrollView>
 
 					<View style={content}>

@@ -15,14 +15,7 @@ class Login extends Component {
 	constructor(props) {
     super(props);
 		this.state = { logged: false, user: '', password: '', isDisabled: false };
-		//console.log('props ', this.props.mainState)
 	}
-	
-	componentWillMount() {
-    if(this.props.mainState.logged == true) {
-      this.props.navigation.navigate('Home');
-    }
-  }
 
 	render() {
 
