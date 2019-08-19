@@ -13,8 +13,14 @@ const LOGO = require('.././assets/images/logo.png');
 class Login extends Component {
 
 	constructor(props) {
-    super(props);
+		super(props);
 		this.state = { logged: false, user: '', password: '', isDisabled: false };
+	}
+
+	componentWillMount() {
+    if(this.props.mainState.logged == true) {
+      this.props.navigation.navigate('Home');
+    }
 	}
 
 	render() {

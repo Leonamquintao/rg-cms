@@ -1,30 +1,28 @@
-import React, { Component } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet, StatusBar } from 'react-native';
+
 import { connect } from 'react-redux';
-import * as actions from '../store/actions';
+import * as actions from '.././store/actions';
 
-class ExitComponent extends Component {
 
-  constructor(props) { super(props); }
 
-  componentWillMount() {
-    this.logoffRoutine();
-  }
+const ExitComponent = props => {
   
-  logoffRoutine() {
-    this.props.logoff(false);
-    this.props.navigation.goBack();
-  }
-
-  render() {
-    return (
-      <View style={styles.exit}>
-        <StatusBar barStyle="dark-content" />
-        <ActivityIndicator size="large" color="#2cc976" />
-      </View>
-    );
-  }
-};
+  useEffect(() => {
+    props.logoff(false);
+    setTimeout(() => {
+      props.navigation.navigate('Login');
+    }, 1000);
+  }, [])
+  
+  return (
+    <View style={styles.exit}>
+      <StatusBar barStyle="dark-content" />
+      <ActivityIndicator size="large" color="#3d444e" />
+    </View>
+  );
+  
+}
 
 const mapStateToProps = state => {
 	return { mainState: state.mainState }

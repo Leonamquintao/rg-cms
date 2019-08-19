@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -6,7 +6,6 @@ import { withNavigation } from 'react-navigation';
 
 const HeaderComponent = props => {
 
-  // const [exp] = useState([]);
   const { iconStyle } = styles;
   return (
     <Header>
@@ -34,4 +33,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(HeaderComponent)
+export default withNavigation(HeaderComponent);

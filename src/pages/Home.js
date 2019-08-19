@@ -8,13 +8,7 @@ import * as actions from '.././store/actions';
 class Home extends Component {
 
 	constructor(props) {
-    super(props);
-	}
-
-	componentWillMount() {
-    if(this.props.mainState.logged == false) {
-      this.props.navigation.navigate('Login');
-    }
+		super(props);
 	}
 	
 	render() {
@@ -23,7 +17,7 @@ class Home extends Component {
 
 		return (
 			<View style={container}>
-				<HeaderComponent headerText={'Home'} />
+				<HeaderComponent headerText={'teste'} />
 				<ScrollView>
 
 					<View style={content}>
