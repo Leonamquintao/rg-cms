@@ -22,7 +22,6 @@ const users = [
   { name: 'Todos', image: require('.././assets/images/user.png') },
   { name: 'João', image: require('.././assets/images/user1.jpg') },
   { name: 'Mary', image: require('.././assets/images/user2.jpg') },
-
 ]
 
 class SideMenu extends Component {
@@ -48,8 +47,9 @@ class SideMenu extends Component {
 
           <View style={{ alignItems: 'center', margin: 10 }}>
 
+            <Text>Add</Text>
             <Button transparent light onPress={() => alert('add user')}>
-              <Icon size={30} color={'#7e8082'} name='plus-circle' />
+              <Icon size={30} color={'#7e8082'} name='plus' />
             </Button>
           </View>
 
@@ -98,7 +98,6 @@ class SideMenu extends Component {
             <View style={{ width: '15%' }}>
               { this.renderBadge(route.name) }
             </View>
-            
           </View>
         </TouchableOpacity>
       )
