@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { Thumbnail, Button } from 'native-base';
 import { connect } from 'react-redux';
 import * as actions from '.././store/actions';
 
 const usr = require('.././assets/images/user.png');
+const usr1 = require('.././assets/images/user1.jpg');
+const usr2 = require('.././assets/images/user2.jpg');
 
 const routes =[
   { name: 'Home', path: 'Home', icon: 'home' },
@@ -16,30 +18,56 @@ const routes =[
   { name: 'Sair',  path: 'Exit', icon: 'sign-out' },
 ];
 
+const users = [
+  { name: 'Todos', image: require('.././assets/images/user.png') },
+  { name: 'João', image: require('.././assets/images/user1.jpg') },
+  { name: 'Mary', image: require('.././assets/images/user2.jpg') },
+
+]
+
 class SideMenu extends Component {
 
   constructor(props) { 
     super(props);
+    this.state = {
+      selectedUser: users[0]
+    };
   }
   
   render() {
     return(
       <View style={styles.container}>
-        <ScrollView>
-          <View style={{ alignItems: 'center'}}>
-            <Image source={usr} style={styles.userImage} />
-            <Text style={{ fontWeight: 'bold', marginTop: 10 }}> USER NAME </Text>
-            <Text style={{ fontSize: 12, color: '#a2a4a5' }}> USER INFO </Text>
+        
+        <View style={styles.accounts}>
+
+          <ScrollView>
+            <View style={{ alignItems: 'center', marginTop: 20, flexDirection: 'column' }}>
+              { this.renderUsers() }
+            </View>
+          </ScrollView>
+
+          <View style={{ alignItems: 'center', margin: 10 }}>
+
+            <Button transparent light onPress={() => alert('add user')}>
+              <Icon size={30} color={'#7e8082'} name='plus-circle' />
+            </Button>
           </View>
 
-          <View style={{marginTop: 20}}>
-            { this.renderRoutes(routes) }
-          </View>
-        </ScrollView>
-
-        <View style={styles.footer}>
-          <Text>Versão 1.0.0</Text>
         </View>
+        
+        <View style={{ flex: 1 }}>
+          <Text style={styles.accountName}>{this.state.selectedUser.name}</Text>
+            <View style={styles.divider} />
+            <ScrollView>
+              { this.renderRoutes(routes) }
+            </ScrollView>
+            <View style={styles.divider} />
+
+            <View style={styles.footer}>
+              <Text>Versão 1.0.0</Text>
+            </View>
+        </View>
+
       </View>
     );
   }
@@ -53,12 +81,17 @@ class SideMenu extends Component {
     this.props.navigation.dispatch(navigateAction);
   }
 
+  selectUser(usr) {
+    console.log()
+    this.setState({ selectedUser: usr })
+  }
+
   renderRoutes(routes) {
     return(
       routes.map((route, index) => 
         <TouchableOpacity onPress={() => this.navigatePage(route.path)} key={index}>
           <View style={styles.menu}>
-            <View style={{ width: '85%', flexDirection: 'row' }}>
+            <View style={{ width: '75%', flexDirection: 'row'}}>
               <Icon name={route.icon} style={styles.menuItem} />
               <Text style={styles.menuItem}>{route.name}</Text>
             </View>
@@ -67,6 +100,18 @@ class SideMenu extends Component {
             </View>
             
           </View>
+        </TouchableOpacity>
+      )
+    );
+  }
+
+  renderUsers() {
+    return(
+      users.map((user, index) => 
+        <TouchableOpacity style={{ margin: 5, alignItems: 'center' }} 
+        onPress={() => this.selectUser(user)} key={index}>
+          <Thumbnail style={{ borderWidth: 0.8, borderColor: '#4da8b0' }} source={user.image} />
+          <Text>{user.name}</Text>
         </TouchableOpacity>
       )
     );
@@ -92,7 +137,23 @@ export default connect(mapStateToProps, actions) (SideMenu)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 80,
+    flexDirection: 'row',
+    paddingTop: 24,
+    backgroundColor: '#FFF'
+  },
+  accounts: {
+    width: 70,
+    backgroundColor: '#e1e4e8'
+  },
+  accountName: {
+    marginTop: 10,
+    textAlign: 'center'
+  },
+  divider: { 
+    borderBottomColor: '#cbccd4', 
+    borderBottomWidth: 1, 
+    width: '100%', 
+    marginTop: 10
   },
   userImage: {
     width: 140,
@@ -106,15 +167,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   menu: {
-    flex: 1,
     flexDirection: 'row',
-    marginLeft: 4,
-    marginRight: 4,
+    margin: 8
   },
   menuItem: {
-    margin: 4,
+    marginRight: 10,
     fontSize: 18,
-    margin: 10,
     color: '#3d444e'
   },
   badgeConteiner: {
@@ -122,14 +180,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#b32a1b',
-    borderRadius: 25,
-    marginTop: 6,
-    marginBottom: 6
+    borderRadius: 25
   },
   badge: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: 12
+    fontSize: 12,
+    margin: 5
   },
   footer: {
     padding: 20,

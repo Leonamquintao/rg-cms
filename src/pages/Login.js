@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, Image, Dimensions, StatusBar, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Image, ImageBackground, Dimensions, StatusBar, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Form, Item, Label, Input, Button } from 'native-base';
 
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ class Login extends Component {
 
 	render() {
 
-		const { container, formStyle, logo, logoPos, btnContainer, btnText } = styles;
+		const { container, formStyle, logo, logoPos, btnContainer, buttomStyle, btnText, btnLink } = styles;
 		
 		return (
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -51,8 +51,15 @@ class Login extends Component {
 						</Item>
 
 						<View style={btnContainer}>
-							<Button rounded primary block onPress={ this.submit.bind(this) } disabled={this.state.isDisabled}>
+							<Button rounded primary block style={buttomStyle}
+								onPress={ this.submit.bind(this) } disabled={this.state.isDisabled}>
 								<Text style={btnText}>Entrar</Text>
+							</Button>
+						</View>
+
+						<View style={btnContainer}>
+							<Button transparent light onPress={ () => alert('Forgot Password') }>
+								<Text style={btnLink}>Esqueci a Senha</Text>
 							</Button>
 						</View>
 		
@@ -97,10 +104,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 	},
 	btnContainer: {
-		marginTop: 20
+		marginTop: 10,
+		alignItems: 'center'
 	},
 	btnText: {
 		color: '#FFF',
     fontWeight: 'bold',
+	},
+	btnLink: {
+		color: '#273469',
+		fontWeight: 'bold',
+	},
+	buttomStyle: {
+		backgroundColor: '#273469'
 	}
 });
