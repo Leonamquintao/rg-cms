@@ -6,10 +6,6 @@ import { Thumbnail, Button } from 'native-base';
 import { connect } from 'react-redux';
 import * as actions from '.././store/actions';
 
-const usr = require('.././assets/images/user.png');
-const usr1 = require('.././assets/images/user1.jpg');
-const usr2 = require('.././assets/images/user2.jpg');
-
 const routes =[
   { name: 'Home', path: 'Home', icon: 'home' },
   { name: 'Blank', path: 'Blank', icon: 'file-code-o' },
@@ -23,7 +19,6 @@ const users = [
   { name: 'João', image: require('.././assets/images/user1.jpg') },
   { name: 'Mary', image: require('.././assets/images/user2.jpg') },
 ]
-
 class SideMenu extends Component {
 
   constructor(props) { 
